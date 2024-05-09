@@ -17,12 +17,27 @@ This is example is built using the [Eventide](http://docs.eventide-project.org/)
 Run `script/setup.sh` to install the dependencies and create the message store Postgres database.
 
 ``` bash
-script/setup.sh
+PGHOST=<localhost> PGUSER=<your_admin_user> PGPASSWORD=<your_admin_password> ./script/setup.sh
 ```
 
 Dependencies are installed locally in the `gems` directory.
 
 For more information on the message store database, see: [http://docs.eventide-project.org/user-guide/message-db/](http://docs.eventide-project.org/user-guide/message-db/)
+
+Then there will be created a new postgres role `message_store`.
+
+Set the password for the newly created `message_store` role:
+
+``` bash
+PGHOST=<localhost> PGUSER=<your_admin_user> PGPASSWORD=<your_password> psql postgres
+```
+
+run this from Psql console:
+``` bash
+ALTER USER message_store WITH PASSWORD '<password_for_message_store_role>';
+```
+
+Then edit and amend the `settings.json` accordingly ;)
 
 ## The Code
 
